@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard Admin{% endblock %}
+{% block page_title %}Dashboard Admin{% endblock %}
+{% block page_subtitle %}Ringkasan performa portfolio dan konten admin.{% endblock %}
+
+{% block content %}
+<div class="row g-4">
+  <div class="col-xl-4 col-md-6">
+    <div class="card panel-card h-100 border-0">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div class="metric-icon bg-primary-subtle text-primary"><i class="bi bi-person-badge"></i></div>
+          <span class="badge bg-primary-subtle text-primary">Profile</span>
+        </div>
+        <h3 class="h2 mb-1">{{ stats.profiles }}</h3>
+        <p class="text-muted mb-0">Total Profile</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-4 col-md-6">
+    <div class="card panel-card h-100 border-0">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div class="metric-icon bg-success-subtle text-success"><i class="bi bi-tools"></i></div>
+          <span class="badge bg-success-subtle text-success">Skill</span>
+        </div>
+        <h3 class="h2 mb-1">{{ stats.skills }}</h3>
+        <p class="text-muted mb-0">Total Skill</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-4 col-md-6">
+    <div class="card panel-card h-100 border-0">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div class="metric-icon bg-warning-subtle text-warning"><i class="bi bi-briefcase"></i></div>
+          <span class="badge bg-warning-subtle text-warning">Experience</span>
+        </div>
+        <h3 class="h2 mb-1">{{ stats.experiences }}</h3>
+        <p class="text-muted mb-0">Total Experience</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-4 col-md-6">
+    <div class="card panel-card h-100 border-0">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div class="metric-icon bg-info-subtle text-info"><i class="bi bi-journal-richtext"></i></div>
+          <span class="badge bg-info-subtle text-info">Project</span>
+        </div>
+        <h3 class="h2 mb-1">{{ stats.projects }}</h3>
+        <p class="text-muted mb-0">Total Project</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-4 col-md-6">
+    <div class="card panel-card h-100 border-0">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div class="metric-icon bg-danger-subtle text-danger"><i class="bi bi-envelope"></i></div>
+          <span class="badge bg-danger-subtle text-danger">Contact</span>
+        </div>
+        <h3 class="h2 mb-1">{{ stats.contacts }}</h3>
+        <p class="text-muted mb-0">Total Contact</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-4 mt-1">
+  <div class="col-lg-8">
+    <div class="card panel-card border-0">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div>
+            <h5 class="mb-1">Quick Action</h5>
+            <p class="text-muted mb-0">Akses cepat ke area utama admin.</p>
+          </div>
+        </div>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <a class="btn btn-outline-primary w-100 py-3" href="{{ url_for('profile_bp.profile_index') }}"><i class="bi bi-person-badge me-2"></i>Akun Saya</a>
+          </div>
+          <div class="col-md-6">
+            <a class="btn btn-outline-success w-100 py-3" href="{{ url_for('skill_bp.skills_index') }}"><i class="bi bi-tools me-2"></i>Tambah Skill</a>
+          </div>
+          <div class="col-md-6">
+            <a class="btn btn-outline-warning w-100 py-3" href="{{ url_for('experience_bp.experiences_index') }}"><i class="bi bi-briefcase me-2"></i>Tambah Experience</a>
+          </div>
+          <div class="col-md-6">
+            <a class="btn btn-outline-info w-100 py-3" href="{{ url_for('project_bp.projects_index') }}"><i class="bi bi-journal-richtext me-2"></i>Tambah Project</a>
+          </div>
+          <div class="col-12">
+            <a class="btn btn-outline-danger w-100 py-3" href="{{ url_for('admin_contact_bp.contacts_index') }}"><i class="bi bi-envelope me-2"></i>Lihat Contact</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="card panel-card border-0 h-100">
+      <div class="card-body d-flex flex-column justify-content-center">
+        <div class="text-center mb-3">
+          <div class="metric-icon bg-primary-subtle text-primary mx-auto mb-3"><i class="bi bi-speedometer2"></i></div>
+          <h5 class="mb-2">Dashboard Admin</h5>
+          <p class="text-muted mb-0">Pantau data portfolio Anda dari satu tempat.</p>
+        </div>
+        <div class="d-grid gap-2">
+          <a class="btn btn-primary" href="{{ url_for('login.admin_dashboard') }}"><i class="bi bi-arrow-clockwise me-2"></i>Segarkan</a>
+          <a class="btn btn-outline-secondary" href="{{ url_for('login.logout') }}"><i class="bi bi-box-arrow-right me-2"></i>Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

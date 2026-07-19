@@ -1,0 +1,32 @@
+{% extends 'public/base_public.html' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h3 class="mb-4">Contact</h3>
+      <form method="post" action="{{ url_for('public_contact_bp.contact_submit') }}">
+        <div class="mb-3">
+          <label class="form-label">Nama</label>
+          <input class="form-control" type="text" name="nama" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input class="form-control" type="email" name="email" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Subjek</label>
+          <input class="form-control" type="text" name="subjek" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Pesan</label>
+          <textarea class="form-control" name="pesan" rows="5" required></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Kirim</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

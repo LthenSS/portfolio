@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ 'Edit Project' if action == 'edit' else 'Tambah Project' }}{% endblock %}
+
+{% block content %}
+<div class="card panel-card border-0">
+  <div class="card-body">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div>
+        <h3 class="mb-1">{{ 'Edit Project' if action == 'edit' else 'Tambah Project' }}</h3>
+        <p class="text-muted mb-0">Unggah visual proyek dan atur tautan yang tampil di portfolio.</p>
+      </div>
+    </div>
+    <form method="post" enctype="multipart/form-data" action="{{ url_for('project_bp.project_edit_submit', project_id=project_id) if action == 'edit' else url_for('project_bp.project_create_submit') }}">
+      <div class="mb-3">
+        <label class="form-label">Judul</label>
+        <input class="form-control" type="text" name="judul" value="{{ project.judul if project and project.judul is defined else project['judul'] if project else '' }}" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Deskripsi</label>
+        <textarea class="form-control" name="deskripsi" rows="4" required>{{ project.deskripsi if project and project.deskripsi is defined else project['deskripsi'] if project else '' }}</textarea>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Link Project</label>
+        <input class="form-control" type="url" name="link_project" value="{{ project.link_project if project and project.link_project is defined else project['link_project'] if project else '' }}" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Gambar</label>
+        <input class="form-control" type="file" name="gambar" accept="image/*" {% if action == 'create' %}required{% endif %}>
+      </div>
+      {% if action == 'edit' and project %}
+        <div class="mb-3">
+          <label class="form-label">Preview Gambar Saat Ini</label>
+          <div>
+            <img src="{{ project.gambar_url if project.gambar_url is defined else project['gambar_url'] }}" alt="Preview Gambar" class="img-fluid" style="max-width: 320px;" />
+          </div>
+        </div>
+      {% endif %}
+      <button class="btn btn-primary" type="submit">{{ 'Update' if action == 'edit' else 'Simpan' }}</button>
+      <a class="btn btn-secondary" href="{{ url_for('project_bp.projects_index') }}">Batal</a>
+    </form>
+  </div>
+</div>
+{% endblock %}

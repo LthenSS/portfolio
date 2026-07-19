@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Experience{% endblock %}
+
+{% block content %}
+<div class="card panel-card border-0">
+  <div class="card-body">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <div>
+        <h3 class="mb-1">Experience</h3>
+        <p class="text-muted mb-0">Riwayat pengalaman kerja dan organisasi.</p>
+      </div>
+      <a class="btn btn-primary" href="{{ url_for('experience_bp.experience_create_form') }}"><i class="bi bi-plus-lg me-2"></i>Tambah Experience</a>
+    </div>
+
+    <table class="table table-striped align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Posisi</th>
+          <th>Perusahaan</th>
+          <th>Durasi</th>
+          <th>Tanggal Dibuat</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for exp in experiences %}
+          <tr>
+            <td>{{ exp.id if exp.id is defined else exp['id'] }}</td>
+            <td>{{ exp.posisi if exp.posisi is defined else exp['posisi'] or '-' }}</td>
+            <td>{{ exp.perusahaan if exp.perusahaan is defined else exp['perusahaan'] or '-' }}</td>
+            <td>{{ exp.durasi if exp.durasi is defined else exp['durasi'] or '-' }}</td>
+            <td>{{ exp.created_at if exp.created_at is defined else exp['created_at'] or '-' }}</td>
+            <td>
+              {% set exp_id = exp.id if exp.id is defined else exp['id'] %}
+              {% if exp_id %}
+                <a class="btn btn-sm btn-outline-warning" href="{{ url_for('experience_bp.experience_edit_form', exp_id=exp_id) }}">Edit</a>
+                <form method="post" action="{{ url_for('experience_bp.experience_delete', exp_id=exp_id) }}" class="d-inline">
+                  <button class="btn btn-sm btn-outline-danger" type="submit">Delete</button>
+                </form>
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

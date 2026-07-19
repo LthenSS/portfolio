@@ -1,0 +1,174 @@
+{% extends 'public/base_public.html' %}
+
+{% block title %}Portfolio{% endblock %}
+
+{% block content %}
+<section id="hero" class="hero py-5 bg-light">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        <span class="section-title">Halo, saya</span>
+        <h1 class="display-5 fw-bold">{{ profile.nama_lengkap if profile and profile.nama_lengkap else 'Nama Lengkap' }}</h1>
+        <p class="lead">{{ profile.nama_panggilan if profile and profile.nama_panggilan else 'Nama Panggilan' }}</p>
+        <p>{{ profile.alamat if profile and profile.alamat else 'Belum ada deskripsi singkat.' }}</p>
+        <a class="btn btn-primary" href="#contact">Contact</a>
+      </div>
+      <div class="col-lg-6 text-center">
+        <img src="{{ profile.foto_url if profile and profile.foto_url else 'https://via.placeholder.com/320x320?text=Profile+Image' }}" alt="Foto Profil" class="profile-img shadow-sm">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="py-5">
+  <div class="container">
+    <div class="mb-4">
+      <span class="section-title">About</span>
+      <h2 class="h3">Tentang Saya</h2>
+    </div>
+    <div class="row gy-3">
+      <div class="col-md-6">
+        <div class="card border-0 shadow-sm p-4">
+          <h5 class="mb-3">Data Personal</h5>
+          <ul class="list-unstyled mb-0">
+            <li><strong>Tempat Lahir:</strong> {{ profile.tempat_lahir if profile and profile.tempat_lahir else 'Belum ada data.' }}</li>
+            <li><strong>Tanggal Lahir:</strong> {{ profile.tanggal_lahir if profile and profile.tanggal_lahir else 'Belum ada data.' }}</li>
+            <li><strong>Universitas:</strong> {{ profile.universitas if profile and profile.universitas else 'Belum ada data.' }}</li>
+            <li><strong>Fakultas:</strong> {{ profile.fakultas if profile and profile.fakultas else 'Belum ada data.' }}</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card border-0 shadow-sm p-4">
+          <h5 class="mb-3">Pendidikan</h5>
+          <ul class="list-unstyled mb-0">
+            <li><strong>Program Studi:</strong> {{ profile.prodi if profile and profile.prodi else 'Belum ada data.' }}</li>
+            <li><strong>Semester:</strong> {{ profile.semester if profile and profile.semester else 'Belum ada data.' }}</li>
+            <li><strong>Alamat:</strong> {{ profile.alamat if profile and profile.alamat else 'Belum ada data.' }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="py-5 bg-light">
+  <div class="container">
+    <div class="mb-4">
+      <span class="section-title">Skills</span>
+      <h2 class="h3">Kemampuan</h2>
+    </div>
+    <div class="row g-3">
+      {% if skills %}
+        {% for skill in skills %}
+          <div class="col-md-4 col-sm-6">
+            <div class="card border-0 shadow-sm p-4 skill-card">
+              <div class="d-flex align-items-center gap-3">
+                <i class="{{ skill.icon_class if skill.icon_class else 'fas fa-star' }} fa-2x"></i>
+                <div>
+                  <h5 class="mb-1">{{ skill.nama_skill }}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="col-12">
+          <p>Belum ada data.</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<section id="experience" class="py-5">
+  <div class="container">
+    <div class="mb-4">
+      <span class="section-title">Experience</span>
+      <h2 class="h3">Pengalaman</h2>
+    </div>
+    <div class="row g-3">
+      {% if experiences %}
+        {% for exp in experiences %}
+          <div class="col-md-6">
+            <div class="card border-0 shadow-sm p-4">
+              <h5>{{ exp.posisi }}</h5>
+              <p class="text-muted mb-1">{{ exp.perusahaan }} • {{ exp.durasi }}</p>
+              <p>{{ exp.deskripsi }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="col-12">
+          <p>Belum ada data.</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="py-5 bg-light">
+  <div class="container">
+    <div class="mb-4">
+      <span class="section-title">Projects</span>
+      <h2 class="h3">Proyek</h2>
+    </div>
+    <div class="row g-3">
+      {% if projects %}
+        {% for project in projects %}
+          <div class="col-md-6">
+            <div class="card border-0 shadow-sm overflow-hidden">
+              <img src="{{ project.gambar_url if project.gambar_url else 'https://via.placeholder.com/640x360?text=Project+Image' }}" alt="{{ project.judul }}" class="w-100 project-image">
+              <div class="card-body">
+                <h5 class="card-title">{{ project.judul }}</h5>
+                <p class="card-text">{{ project.deskripsi }}</p>
+                {% if project.link_project %}
+                  <a class="btn btn-outline-primary" href="{{ project.link_project }}" target="_blank">Lihat Project</a>
+                {% else %}
+                  <button class="btn btn-outline-secondary" disabled>Tidak ada link</button>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="col-12">
+          <p>Belum ada data.</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="py-5">
+  <div class="container">
+    <div class="mb-4">
+      <span class="section-title">Contact</span>
+      <h2 class="h3">Kirim Pesan</h2>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <form method="post" action="{{ url_for('public_contact_bp.contact_submit') }}">
+          <div class="mb-3">
+            <label class="form-label">Nama</label>
+            <input class="form-control" type="text" name="nama" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input class="form-control" type="email" name="email" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Subjek</label>
+            <input class="form-control" type="text" name="subjek" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Pesan</label>
+            <textarea class="form-control" name="pesan" rows="5" required></textarea>
+          </div>
+          <button class="btn btn-primary" type="submit">Kirim</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

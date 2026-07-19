@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block title %}Akun{% endblock %}
+{% block page_title %}Akun{% endblock %}
+{% block page_subtitle %}Perbarui informasi akun dan profil Anda di satu halaman.{% endblock %}
+
+{% block content %}
+<div class="card panel-card border-0">
+  <div class="card-body p-4">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+      <div>
+        <h3 class="mb-1">Akun Saya</h3>
+        <p class="text-muted mb-0">Update data profil dan password Anda di sini.</p>
+      </div>
+    </div>
+
+    <form method="post" enctype="multipart/form-data" action="{{ url_for('profile_bp.profile_index') }}">
+      <div class="row g-3">
+        <div class="col-md-4">
+          <label class="form-label">Nama Lengkap</label>
+          <input type="text" class="form-control" name="nama_lengkap" value="{{ profile.nama_lengkap if profile else '' }}" required>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Nama Panggilan</label>
+          <input type="text" class="form-control" name="nama_panggilan" value="{{ profile.nama_panggilan if profile else '' }}">
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Tempat Lahir</label>
+          <input type="text" class="form-control" name="tempat_lahir" value="{{ profile.tempat_lahir if profile else '' }}">
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Tanggal Lahir</label>
+          <input type="date" class="form-control" name="tanggal_lahir" value="{{ profile.tanggal_lahir if profile and profile.tanggal_lahir else '' }}">
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control" name="email" value="{{ profile.email if profile else '' }}" required>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Telepon</label>
+          <input type="text" class="form-control" name="telepon" value="{{ profile.telepon if profile else '' }}">
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Universitas</label>
+          <input type="text" class="form-control" name="universitas" value="{{ profile.universitas if profile else '' }}" required>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Fakultas</label>
+          <input type="text" class="form-control" name="fakultas" value="{{ profile.fakultas if profile else '' }}">
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Prodi</label>
+          <input type="text" class="form-control" name="prodi" value="{{ profile.prodi if profile else '' }}">
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Semester</label>
+          <input type="text" class="form-control" name="semester" value="{{ profile.semester if profile else '' }}">
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Password Baru</label>
+          <input type="password" class="form-control" name="password" placeholder="Kosongkan jika tidak ingin mengubah">
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Konfirmasi Password</label>
+          <input type="password" class="form-control" name="password_confirm" placeholder="Ulangi password baru">
+        </div>
+        <div class="col-12">
+          <label class="form-label">Alamat</label>
+          <textarea class="form-control" name="alamat" rows="3">{{ profile.alamat if profile else '' }}</textarea>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Foto Profil</label>
+          <input type="file" class="form-control" name="foto_profil">
+        </div>
+        <div class="col-md-6 d-flex align-items-center justify-content-center">
+          {% if profile and profile.foto_url %}
+            <img src="{{ profile.foto_url }}" alt="Foto profil" class="rounded-circle border" width="120" height="120" style="object-fit: cover;">
+          {% else %}
+            <div class="rounded-circle border d-flex align-items-center justify-content-center bg-light" style="width: 120px; height: 120px;">
+              <i class="bi bi-person-fill text-muted fs-1"></i>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+      <div class="mt-4">
+        <button type="submit" class="btn btn-success">Simpan Perubahan</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

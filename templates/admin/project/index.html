@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}Project{% endblock %}
+
+{% block content %}
+<div class="card panel-card border-0">
+  <div class="card-body">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <div>
+        <h3 class="mb-1">Project</h3>
+        <p class="text-muted mb-0">Kelola proyek yang ditampilkan di portfolio publik.</p>
+      </div>
+      <a class="btn btn-primary" href="{{ url_for('project_bp.project_create_form') }}"><i class="bi bi-plus-lg me-2"></i>Tambah Project</a>
+    </div>
+
+    <table class="table table-striped align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Thumbnail</th>
+          <th>Judul</th>
+          <th>Link</th>
+          <th>Tanggal Dibuat</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for project in projects %}
+          <tr>
+            <td>{{ project.id if project.id is defined else project['id'] }}</td>
+            <td>
+              <img src="{{ project.gambar_url if project.gambar_url is defined else project['gambar_url'] }}" alt="Thumbnail" style="width: 100px; height: auto; object-fit: cover;" />
+            </td>
+            <td>{{ project.judul if project.judul is defined else project['judul'] or '-' }}</td>
+            <td><a href="{{ project.link_project if project.link_project is defined else project['link_project'] }}" target="_blank">Link</a></td>
+            <td>{{ project.created_at if project.created_at is defined else project['created_at'] or '-' }}</td>
+            <td>
+              {% set project_id = project.id if project.id is defined else project['id'] %}
+              {% if project_id %}
+                <a class="btn btn-sm btn-outline-warning" href="{{ url_for('project_bp.project_edit_form', project_id=project_id) }}">Edit</a>
+                <form method="post" action="{{ url_for('project_bp.project_delete', project_id=project_id) }}" class="d-inline">
+                  <button class="btn btn-sm btn-outline-danger" type="submit">Delete</button>
+                </form>
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

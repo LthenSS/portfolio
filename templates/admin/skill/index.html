@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% block title %}Skill{% endblock %}
+{% block page_title %}Skill{% endblock %}
+{% block page_subtitle %}Kelola daftar skill portfolio.{% endblock %}
+
+{% block content %}
+<div class="card panel-card border-0">
+  <div class="card-body p-4">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+      <div>
+        <h3 class="mb-1">Skill</h3>
+        <p class="text-muted mb-0">Kelola daftar skill portfolio dengan tampilan yang rapi.</p>
+      </div>
+      <a class="btn btn-primary" href="{{ url_for('skill_bp.skill_create_form') }}"><i class="bi bi-plus-lg me-2"></i>Tambah Skill</a>
+    </div>
+
+    <div class="row g-3 align-items-center mb-4">
+      <div class="col-md-6">
+        <div class="input-group">
+          <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
+          <input type="text" id="skillSearch" class="form-control" placeholder="Cari skill...">
+        </div>
+      </div>
+    </div>
+
+    {% if skills %}
+      <div class="table-responsive">
+        <table class="table align-middle" id="skillTable">
+          <thead class="table-light">
+            <tr>
+              <th>Icon</th>
+              <th>Nama Skill</th>
+              <th>Icon Class</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for skill in skills %}
+              {% set skill_id = skill.id if skill.id is defined else skill['id'] %}
+              {% set nama_skill = skill.nama_skill if skill.nama_skill is defined else skill['nama_skill'] or '-' %}
+              {% set icon_class = skill.icon_class if skill.icon_class is defined else skill['icon_class'] or '-' %}
+              <tr>
+                <td>
+                  <div class="d-flex align-items-center justify-content-center rounded-circle bg-light" style="width: 46px; height: 46px;">
+                    <i class="{{ icon_class }}" style="font-size: 24px;"></i>
+                  </div>
+                </td>
+                <td>{{ nama_skill }}</td>
+                <td><code>{{ icon_class }}</code></td>
+                <td>
+                  <div class="d-flex gap-2">
+                    <a class="btn btn-sm btn-outline-warning" href="{{ url_for('skill_bp.skill_edit_form', skill_id=skill_id) }}" title="Edit">
+                      <i class="bi bi-pencil-square"></i>
+                    </a>
+                    <button class="btn btn-sm btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal{{ skill_id }}" title="Delete">
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </div>
+
+                  <div class="modal fade" id="deleteModal{{ skill_id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ skill_id }}" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="deleteModalLabel{{ skill_id }}">Konfirmasi Hapus</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          Apakah Anda yakin ingin menghapus skill <strong>{{ nama_skill }}</strong>?
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                          <form method="post" action="{{ url_for('skill_bp.skill_delete', skill_id=skill_id) }}" class="d-inline">
+                            <button class="btn btn-danger" type="submit">Hapus</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <nav class="mt-4" aria-label="Skill pagination">
+        <ul class="pagination justify-content-end">
+          <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+          <li class="page-item active"><a class="page-link" href="#">1</a></li>
+          <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+        </ul>
+      </nav>
+    {% else %}
+      <div class="alert alert-info rounded-3 mb-0">Belum ada data skill.</div>
+    {% endif %}
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const searchInput = document.getElementById('skillSearch');
+    const table = document.getElementById('skillTable');
+    if (!searchInput || !table) return;
+
+    searchInput.addEventListener('keyup', function () {
+      const term = this.value.toLowerCase();
+      const rows = table.querySelectorAll('tbody tr');
+      rows.forEach(function (row) {
+        const text = row.textContent.toLowerCase();
+        row.style.display = text.includes(term) ? '' : 'none';
+      });
+    });
+  });
+</script>
+{% endblock %}

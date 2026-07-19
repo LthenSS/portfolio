@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Detail Contact{% endblock %}
+
+{% block content %}
+<div class="card panel-card border-0">
+  <div class="card-body">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div>
+        <h3 class="mb-1">Detail Contact</h3>
+        <p class="text-muted mb-0">Lihat pesan lengkap yang masuk dari pengunjung.</p>
+      </div>
+    </div>
+    <dl class="row">
+      <dt class="col-sm-3">Nama</dt>
+      <dd class="col-sm-9">{{ contact.nama if contact.nama is defined else contact['nama'] }}</dd>
+
+      <dt class="col-sm-3">Email</dt>
+      <dd class="col-sm-9">{{ contact.email if contact.email is defined else contact['email'] }}</dd>
+
+      <dt class="col-sm-3">Subjek</dt>
+      <dd class="col-sm-9">{{ contact.subjek if contact.subjek is defined else contact['subjek'] }}</dd>
+
+      <dt class="col-sm-3">Pesan</dt>
+      <dd class="col-sm-9"><pre>{{ contact.pesan if contact.pesan is defined else contact['pesan'] }}</pre></dd>
+
+      <dt class="col-sm-3">Tanggal</dt>
+      <dd class="col-sm-9">{{ contact.created_at if contact.created_at is defined else contact['created_at'] or '-' }}</dd>
+
+      <dt class="col-sm-3">Status</dt>
+      <dd class="col-sm-9">{{ contact.status if contact.status is defined else contact['status'] }}</dd>
+    </dl>
+    <a class="btn btn-secondary" href="{{ url_for('admin_contact_bp.contacts_index') }}">Kembali</a>
+  </div>
+</div>
+{% endblock %}

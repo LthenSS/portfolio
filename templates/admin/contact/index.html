@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block content %}
+<div class="card panel-card border-0">
+  <div class="card-body">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <div>
+        <h3 class="mb-1">Contact</h3>
+        <p class="text-muted mb-0">Lihat dan kelola pesan yang masuk dari portfolio publik.</p>
+      </div>
+    </div>
+    <table class="table table-hover align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Nama</th>
+          <th>Email</th>
+          <th>Subjek</th>
+          <th>Tanggal</th>
+          <th>Status</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for contact in contacts %}
+        <tr>
+          <td>{{ contact.id if contact.id is defined else contact['id'] }}</td>
+          <td>{{ contact.nama if contact.nama is defined else contact['nama'] }}</td>
+          <td>{{ contact.email if contact.email is defined else contact['email'] }}</td>
+          <td>{{ contact.subjek if contact.subjek is defined else contact['subjek'] }}</td>
+          <td>{{ contact.created_at if contact.created_at is defined else contact['created_at'] or '-' }}</td>
+          <td>{{ contact.status if contact.status is defined else contact['status'] }}</td>
+          <td>
+            {% set contact_id = contact.id if contact.id is defined else contact['id'] %}
+            <a class="btn btn-sm btn-outline-info" href="{{ url_for('admin_contact_bp.contact_detail', contact_id=contact_id) }}">Lihat</a>
+            <form method="post" action="{{ url_for('admin_contact_bp.contact_mark_read', contact_id=contact_id) }}" class="d-inline">
+              <button type="submit" class="btn btn-sm btn-outline-secondary">Tandai Sudah Dibaca</button>
+            </form>
+            <form method="post" action="{{ url_for('admin_contact_bp.contact_delete', contact_id=contact_id) }}" class="d-inline">
+              <button type="submit" class="btn btn-sm btn-outline-danger">Hapus</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

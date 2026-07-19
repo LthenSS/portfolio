@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portofolio - Raihan Agil Maulana</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="Frontend/utama/css/style.css" /> 
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav id="navbar">
+      <a href="Frontend/admin/login.html" class="logo">Agil.</a>
+      <ul id="navMenu">
+        <li><a href="#home" class="nav-link active">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#experience" class="nav-link">Experience</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="hero-content" id="hero-content">
+        <div class="loading-skeleton">Memuat profil...</div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+      <h2 class="section-title">Tentang Saya</h2>
+      <div class="about-content">
+        <div class="about-img">
+          <img id="profile-photo" src="" alt="Foto Profil" style="display:none; width:100%; border-radius:50%;" />
+          <div class="placeholder-img" id="photo-placeholder"><i class="fas fa-user"></i></div>
+        </div>
+        <div class="about-text" id="about-text">
+          <!-- Diisi oleh JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="bg-white">
+      <h2 class="section-title">Keahlian</h2>
+      <div class="skills-grid" id="skills-container">
+        <!-- Diisi oleh JS -->
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+      <h2 class="section-title">Pengalaman</h2>
+      <div class="timeline" id="experience-container">
+        <!-- Diisi oleh JS -->
+      </div>
+    </section>
+
+    <!-- Projects Section (STRUKTUR BARU UNTUK OVERLAY) -->
+    <section id="projects" class="bg-white">
+      <h2 class="section-title">Proyek Saya</h2>
+      <div class="projects-grid" id="projects-container">
+        <!-- Template Project Card akan di-render di sini oleh JS -->
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <h2 class="section-title">Hubungi Saya</h2>
+      <div class="contact-container">
+        <p id="contact-email-display">Email akan dimuat dari database...</p>
+        <form class="contact-form" id="contactForm">
+          <input type="text" id="contactName" placeholder="Nama Anda" required />
+          <input type="email" id="contactEmail" placeholder="Email Anda" required />
+          <textarea id="contactMessage" placeholder="Pesan Anda" required></textarea>
+          <button type="submit" class="btn" id="sendBtn">Kirim Pesan</button>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; <span id="current-year"></span> Raihan Agil Maulana. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Load API Config & Main Script -->
+    <script src="Frontend/admin/js/api.js"></script>
+    <script src="Frontend/utama/js/script.js"></script>
+  </body>
+</html>

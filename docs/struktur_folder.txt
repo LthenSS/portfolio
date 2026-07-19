@@ -1,0 +1,61 @@
+Tugas_Portofolio/
+│
+├── Backend/
+│   ├── admin/
+│   │   ├── __init__.py
+│   │   ├── akun.py
+│   │   ├── dashboard.py
+│   │   ├── experience.py
+│   │   ├── login.py
+│   │   ├── projects.py          
+│   │   └── skills.py            
+│   │
+│   └── profil/                      
+│       ├── __init__.py            
+│       └── profil.py               
+│
+├── Frontend/
+│   ├── admin/
+│   │   ├── css/
+│   │   │   ├── akun.css
+│   │   │   ├── base.css
+│   │   │   ├── dashboard.css
+│   │   │   ├── experience.css
+│   │   │   ├── login.css
+│   │   │   ├── projects.css
+│   │   │   └── skills.css
+│   │   │
+│   │   ├── js/
+│   │   │   ├── akun.js
+│   │   │   ├── base.js
+│   │   │   ├── dashboard.js
+│   │   │   ├── experience.js
+│   │   │   ├── init-data.js
+│   │   │   ├── login.js
+│   │   │   ├── projects.js
+│   │   │   └── skills.js
+│   │   │
+│   │   ├── akun.html
+│   │   ├── base.html
+│   │   ├── dashboard.html
+│   │   ├── experience.html
+│   │   ├── login.html
+│   │   ├── projects.html
+│   │   └── skills.html
+│   │
+│   └── profil/
+│       ├── css/
+│       │   ├── projects.css
+│       │   └── style.css
+│       │
+│       └── js/
+│           ├── projects.js
+│           └── script.js
+│
+├── database.sql
+├── index.html
+├── app.py
+├── config.py
+├── model.py
+├── README.md
+└── .gitignore

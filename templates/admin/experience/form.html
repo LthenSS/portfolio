@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}{% if action == 'edit' %}Edit Experience{% else %}Tambah Experience{% endif %}{% endblock %}
+
+{% block content %}
+<div class="card panel-card border-0">
+  <div class="card-body">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div>
+        <h3 class="mb-1">{% if action == 'edit' %}Edit Experience{% else %}Tambah Experience{% endif %}</h3>
+        <p class="text-muted mb-0">Perbarui pengalaman kerja atau organisasi Anda.</p>
+      </div>
+    </div>
+    <form method="post" action="{% if action == 'edit' %}{{ url_for('experience_bp.experience_edit_submit', exp_id=exp_id) }}{% else %}{{ url_for('experience_bp.experience_create_submit') }}{% endif %}">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label">Posisi</label>
+          <input type="text" class="form-control" name="posisi" value="{{ experience.posisi if experience and experience.posisi is defined else (experience['posisi'] if experience else '') }}" required>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Perusahaan</label>
+          <input type="text" class="form-control" name="perusahaan" value="{{ experience.perusahaan if experience and experience.perusahaan is defined else (experience['perusahaan'] if experience else '') }}" required>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Durasi</label>
+          <input type="text" class="form-control" name="durasi" value="{{ experience.durasi if experience and experience.durasi is defined else (experience['durasi'] if experience else '') }}" required>
+        </div>
+        <div class="col-12">
+          <label class="form-label">Deskripsi</label>
+          <textarea class="form-control" name="deskripsi" rows="4" required>{{ experience.deskripsi if experience and experience.deskripsi is defined else (experience['deskripsi'] if experience else '') }}</textarea>
+        </div>
+      </div>
+      <div class="mt-4">
+        <button type="submit" class="btn btn-success">Simpan</button>
+        <a class="btn btn-secondary" href="{{ url_for('experience_bp.experiences_index') }}">Kembali</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}{% if action == 'edit' %}Edit Skill{% else %}Tambah Skill{% endif %}{% endblock %}
+
+{% block content %}
+<div class="card panel-card border-0">
+  <div class="card-body">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div>
+        <h3 class="mb-1">{% if action == 'edit' %}Edit Skill{% else %}Tambah Skill{% endif %}</h3>
+        <p class="text-muted mb-0">Tambahkan skill dengan preview icon langsung.</p>
+      </div>
+    </div>
+    <form method="post" action="{% if action == 'edit' %}{{ url_for('skill_bp.skill_edit_submit', skill_id=skill_id) }}{% else %}{{ url_for('skill_bp.skill_create_submit') }}{% endif %}">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label">Nama Skill</label>
+          <input type="text" class="form-control" name="nama_skill" value="{{ skill.nama_skill if skill and skill.nama_skill is defined else (skill['nama_skill'] if skill else '') }}" required>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Icon Class</label>
+          <input type="text" class="form-control" id="icon_input" name="icon_class" value="{{ skill.icon_class if skill and skill.icon_class is defined else (skill['icon_class'] if skill else '') }}" required>
+        </div>
+        <div class="col-12">
+          <label class="form-label">Preview Icon</label>
+          <div id="icon_preview" class="fs-3">
+            <i class="{{ skill.icon_class if skill and skill.icon_class is defined else (skill['icon_class'] if skill else '') }}"></i>
+          </div>
+        </div>
+      </div>
+      <div class="mt-4">
+        <button type="submit" class="btn btn-success">Simpan</button>
+        <a class="btn btn-secondary" href="{{ url_for('skill_bp.skills_index') }}">Kembali</a>
+      </div>
+    </form>
+  </div>
+  <script>
+    // Update preview icon realtime saat user mengetik class icon
+    document.addEventListener('DOMContentLoaded', function(){
+      const input = document.getElementById('icon_input');
+      const preview = document.getElementById('icon_preview');
+      input.addEventListener('input', function(){
+        preview.innerHTML = '<i class="' + (input.value || '') + '"></i>';
+      });
+    });
+  </script>
+</div>
+{% endblock %}

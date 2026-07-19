@@ -1,0 +1,14 @@
+Flask==3.0.0
+Flask-CORS==4.0.0
+Flask-SQLAlchemy==3.1.1
+Flask-Migrate==4.0.5
+PyMySQL==1.1.1
+python-dotenv==1.0.1
+cloudinary==1.41.0
+resend==2.0.0
+requests==2.32.3
+Werkzeug==3.0.1
+PyJWT==2.8.0
+cryptography==41.0.7
+certifi==2024.6.16
+gunicorn==21.2.0
